@@ -1,5 +1,9 @@
 package fitness;
 
+import fitness.consumable.Consumable;
+import fitness.consumable.Drink;
+import fitness.consumable.Meal;
+
 import java.time.LocalDateTime;
 import java.util.*;
 
@@ -16,7 +20,7 @@ public class Fitness {
     public int eaten() {
         int sum = 0;
         for (Meal meal : meals) {
-            sum += meal.kcal;
+            sum += meal.volume();
         }
         return sum;
     }
@@ -30,8 +34,9 @@ public class Fitness {
     public int drunk() {
         int sum = 0;
         for (Drink drink : drinks) {
-            sum += drink.ml;
+            sum += drink.volume();
         }
         return sum;
     }
+
 }
