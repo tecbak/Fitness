@@ -13,11 +13,11 @@ public final class Walk implements Consumable {
 
     @Override
     public int volume() {
-        return 0;
+        return steps;
     }
 
     @Override
     public LocalDateTime dateAndTime() {
-        return null;
+        return dateTime;
     }
 }

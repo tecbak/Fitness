@@ -4,11 +4,11 @@ import java.time.LocalDateTime;
 
 public final class Meal implements Consumable {
     private final int kcal;
-    private final LocalDateTime dt;
+    private final LocalDateTime dateTime;
 
-    public Meal(int kcal, LocalDateTime dt) {
+    public Meal(int kcal, LocalDateTime dateTime) {
         this.kcal = kcal;
-        this.dt = dt;
+        this.dateTime = dateTime;
     }
 
     @Override
@@ -18,6 +18,6 @@ public final class Meal implements Consumable {
 
     @Override
     public LocalDateTime dateAndTime() {
-        return dt;
+        return dateTime;
     }
 }
