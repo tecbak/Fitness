@@ -1,11 +1,9 @@
+package fitness;
+
 import org.junit.Before;
 import org.junit.Test;
-import org.mockito.cglib.core.Local;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.util.Date;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.*;
@@ -21,11 +19,22 @@ public class FitnessTest {
     }
 
     @Test
-    public void drinkWater() throws Exception {
-        final int waterVolume = 200;
+    public void drink() throws Exception {
+        final int ml = 200;
 
-        fitness.drinkWater(waterVolume, dt);
-        assertThat(fitness.drunkWater(), is(waterVolume));
+        fitness.drink(ml, dt);
+        int drunk = fitness.drunk();
 
+        assertThat(drunk, is(ml));
+    }
+
+    @Test
+    public void eat() throws Exception {
+        final int kcal = 500;
+
+        fitness.eat(kcal, dt);
+        int eaten = fitness.eaten();
+
+        assertThat(eaten, is(kcal));
     }
 }
