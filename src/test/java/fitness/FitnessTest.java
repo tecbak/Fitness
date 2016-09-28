@@ -37,4 +37,14 @@ public class FitnessTest {
 
         assertThat(eaten, is(kcal));
     }
+
+    @Test
+    public void walk() throws Exception {
+        final int steps = 1000;
+
+        fitness.walk(steps, dt);
+        int walked = fitness.walked();
+
+        assertThat(walked, is(steps));
+    }
 }

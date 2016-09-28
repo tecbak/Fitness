@@ -3,6 +3,7 @@ package fitness;
 import fitness.consumable.Consumable;
 import fitness.consumable.Drink;
 import fitness.consumable.Meal;
+import fitness.consumable.Walk;
 
 import java.time.LocalDateTime;
 import java.util.*;
@@ -10,6 +11,7 @@ import java.util.*;
 public class Fitness {
     private List<Drink> drinks = new ArrayList<>();
     private List<Meal> meals = new ArrayList<>();
+    private List<Walk> walks = new ArrayList<>();
 
     public void eat(int kcal, LocalDateTime dt) {
         Meal meal = new Meal(kcal, dt);
@@ -21,12 +23,21 @@ public class Fitness {
         drinks.add(drink);
     }
 
+    public void walk(int steps, LocalDateTime dt) {
+        Walk walk = new Walk(steps, dt);
+        walks.add(walk);
+    }
+
     public int eaten() {
         return volume(meals);
     }
 
     public int drunk() {
         return volume(drinks);
+    }
+
+    public int walked() {
+        return volume(walks);
     }
 
     private int volume(List<? extends Consumable> consumables) {
