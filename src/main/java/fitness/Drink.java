@@ -2,9 +2,9 @@ package fitness;
 
 import java.time.LocalDateTime;
 
-class Drink {
-    int ml;
-    LocalDateTime dt;
+final class Drink {
+    final int ml;
+    final LocalDateTime dt;
 
     public Drink(int ml, LocalDateTime dt) {
         this.ml = ml;
