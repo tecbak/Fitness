@@ -14,6 +14,7 @@ public class Fitness {
     private List<Walk> walks = new ArrayList<>();
     private int waterDailyNorm;
     private int mealDailyNorm;
+    private int walkDailyNorm;
 
     public void eat(int kcal, LocalDateTime dt) {
         Meal meal = new Meal(kcal, dt);
@@ -64,5 +65,13 @@ public class Fitness {
 
     public int getMealDailyNorm() {
         return mealDailyNorm;
+    }
+
+    public void setWalkDailyNorm(int walkDailyNorm) {
+        this.walkDailyNorm = walkDailyNorm;
+    }
+
+    public int getWalkDailyNorm() {
+        return walkDailyNorm;
     }
 }

@@ -67,4 +67,14 @@ public class FitnessTest {
 
         assertThat(kcal, is(mealDailyNorm));
     }
+
+    @Test
+    public void setAndGetWalkDailyNorm() throws Exception {
+        final int steps = 2000;
+
+        fitness.setWalkDailyNorm(steps);
+        int walkDailyNorm = fitness.getWalkDailyNorm();
+
+        assertThat(steps, is(walkDailyNorm));
+    }
 }
