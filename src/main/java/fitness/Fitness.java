@@ -77,15 +77,7 @@ public class Fitness {
     }
 
     public int waterLeft(LocalDate date) {
-        int drunk = 0;
-
-        for (Drink drink : drinks) {
-            if (drink.getDate().equals(date)) {
-                drunk += drink.volume();
-            }
-        }
-
-        return waterDailyNorm - drunk;
+        return consumableLeft(drinks, date, waterDailyNorm);
     }
 
     public int mealLeft(LocalDate date) {
