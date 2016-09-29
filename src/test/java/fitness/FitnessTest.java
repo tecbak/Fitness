@@ -81,33 +81,4 @@ public class FitnessTest {
 
         assertThat(steps, is(walkDailyNorm));
     }
-
-    @Test
-    public void waterLeft() throws Exception {
-        int waterDailyNorm = 3000;
-        fitness.setWaterDailyNorm(waterDailyNorm);
-
-        //Drink twice at one day
-        LocalDate date0 = LocalDate.of(2016, 1, 1);
-        LocalTime time00 = LocalTime.of(12, 30);
-        LocalTime time01 = LocalTime.of(15, 25);
-        LocalDateTime dateTime00 = LocalDateTime.of(date0, time00);
-        LocalDateTime dateTime01 = LocalDateTime.of(date0, time01);
-        int ml00 = 100;
-        int ml01 = 200;
-        fitness.drink(ml00, dateTime00);
-        fitness.drink(ml01, dateTime01);
-
-        //Drink once at another day
-        LocalDate date1 = LocalDate.of(2016, 1, 10);
-        LocalTime time10 = LocalTime.of(10, 10);
-        LocalDateTime dateTime10 = LocalDateTime.of(date1, time10);
-        int ml10 = 300;
-        fitness.drink(ml10, dateTime10);
-
-        int expected = waterDailyNorm - (ml00 + ml01);
-        int left = fitness.waterLeft(date0);
-
-        assertThat(left, is(expected));
-    }
 }
