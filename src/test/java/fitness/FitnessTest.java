@@ -81,4 +81,6 @@ public class FitnessTest {
 
         assertThat(steps, is(walkDailyNorm));
     }
+
+
 }

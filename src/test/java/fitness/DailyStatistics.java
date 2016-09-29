@@ -83,4 +83,26 @@ public class DailyStatistics {
 
         assertThat(left, is(expected));
     }
+
+    @Test
+    public void walkLeft() throws Exception {
+        final int walkDailyNorm = 1500;
+        final int steps00 = 1000;
+        final int steps01 = 400;
+        final int steps10 = 7000;
+
+        fitness.setWalkDailyNorm(walkDailyNorm);
+
+        //Walk twice at one day
+        fitness.walk(steps00, dateTime00);
+        fitness.walk(steps01, dateTime01);
+
+        //Walk one at another day
+        fitness.walk(steps10, dateTime10);
+
+        int expected = walkDailyNorm - (steps00 + steps01);
+        int left = fitness.walkLeft(date0);
+
+        assertThat(left, is(expected));
+    }
 }

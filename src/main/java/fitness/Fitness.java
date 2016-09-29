@@ -84,6 +84,10 @@ public class Fitness {
         return consumableLeft(meals, date, mealDailyNorm);
     }
 
+    public int walkLeft(LocalDate date) {
+        return consumableLeft(walks, date, walkDailyNorm);
+    }
+
     private int consumableLeft(List<? extends Consumable> consumables, LocalDate date, int dailyNorm) {
         assert (dailyNorm >= 0);
 
