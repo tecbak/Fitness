@@ -32,10 +32,12 @@ public final class Drink implements Consumable {
         return dateTime;
     }
 
+    @Override
     public LocalTime getTime() {
         return dateTime.toLocalTime();
     }
 
+    @Override
     public LocalDate getDate() {
         return dateTime.toLocalDate();
     }

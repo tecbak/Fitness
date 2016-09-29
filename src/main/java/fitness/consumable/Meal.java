@@ -1,6 +1,8 @@
 package fitness.consumable;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 public final class Meal implements Consumable {
     private final int kcal;
@@ -19,5 +21,15 @@ public final class Meal implements Consumable {
     @Override
     public LocalDateTime getDateTime() {
         return dateTime;
+    }
+
+    @Override
+    public LocalTime getTime() {
+        return dateTime.toLocalTime();
+    }
+
+    @Override
+    public LocalDate getDate() {
+        return dateTime.toLocalDate();
     }
 }

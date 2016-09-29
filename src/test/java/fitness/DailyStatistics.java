@@ -61,4 +61,26 @@ public class DailyStatistics {
 
         assertThat(left, is(expected));
     }
+
+    @Test
+    public void mealLeft() throws Exception {
+        final int mealDailyNorm = 2000;
+        final int kcal00 = 500;
+        final int kcal01 = 600;
+        final int kcal10 = 1000;
+
+        fitness.setMealDailyNorm(mealDailyNorm);
+
+        //Eat twice at one day
+        fitness.eat(kcal00, dateTime00);
+        fitness.eat(kcal01, dateTime01);
+
+        //Eat once at another day
+        fitness.eat(kcal10, dateTime10);
+
+        int expected = mealDailyNorm - (kcal00 + kcal01);
+        int left = fitness.mealLeft(date0);
+
+        assertThat(left, is(expected));
+    }
 }

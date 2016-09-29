@@ -87,4 +87,20 @@ public class Fitness {
 
         return waterDailyNorm - drunk;
     }
+
+    public int mealLeft(LocalDate date) {
+        return consumableLeft(meals, date, mealDailyNorm);
+    }
+
+    private int consumableLeft(List<? extends Consumable> consumables, LocalDate date, int dailyNorm) {
+        assert (dailyNorm >= 0);
+
+        int sum = 0;
+        for (Consumable consumable : consumables) {
+            if (consumable.getDate().equals(date)) {
+                sum += consumable.volume();
+            }
+        }
+        return dailyNorm - sum;
+    }
 }
