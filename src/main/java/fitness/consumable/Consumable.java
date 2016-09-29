@@ -5,5 +5,5 @@ import java.time.LocalDateTime;
 public interface Consumable {
     int volume();
 
-    LocalDateTime dateAndTime();
+    LocalDateTime getDateTime();
 }

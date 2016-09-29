@@ -17,7 +17,7 @@ public final class Meal implements Consumable {
     }
 
     @Override
-    public LocalDateTime dateAndTime() {
+    public LocalDateTime getDateTime() {
         return dateTime;
     }
 }

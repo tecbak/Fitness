@@ -5,6 +5,7 @@ import fitness.consumable.Drink;
 import fitness.consumable.Meal;
 import fitness.consumable.Walk;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.*;
 
@@ -73,5 +74,17 @@ public class Fitness {
 
     public int getWalkDailyNorm() {
         return walkDailyNorm;
+    }
+
+    public int waterLeft(LocalDate date) {
+        int drunk = 0;
+
+        for (Drink drink : drinks) {
+            if (drink.getDate().equals(date)) {
+                drunk += drink.volume();
+            }
+        }
+
+        return waterDailyNorm - drunk;
     }
 }

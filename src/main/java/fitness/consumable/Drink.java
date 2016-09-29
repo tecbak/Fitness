@@ -1,10 +1,21 @@
 package fitness.consumable;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.util.Comparator;
 
 public final class Drink implements Consumable {
     private final int ml;
     private final LocalDateTime dateTime;
+
+    public static class DrinkComparator implements Comparator<Drink> {
+        @Override
+        public int compare(Drink o1, Drink o2) {
+            return 0;
+        }
+    }
+
 
     public Drink(int ml, LocalDateTime dateTime) {
         this.ml = ml;
@@ -17,7 +28,15 @@ public final class Drink implements Consumable {
     }
 
     @Override
-    public LocalDateTime dateAndTime() {
+    public LocalDateTime getDateTime() {
         return dateTime;
+    }
+
+    public LocalTime getTime() {
+        return dateTime.toLocalTime();
+    }
+
+    public LocalDate getDate() {
+        return dateTime.toLocalDate();
     }
 }
