@@ -49,12 +49,22 @@ public class FitnessTest {
     }
 
     @Test
-    public void setWaterDailyNorm() throws Exception {
+    public void setAndGetWaterDailyNorm() throws Exception {
         final int ml = 2000;
 
         fitness.setWaterDailyNorm(ml);
         int waterDailyNorm = fitness.getWaterDailyNorm();
 
         assertThat(ml, is(waterDailyNorm));
+    }
+
+    @Test
+    public void setAndGetMealDailyNorm() throws Exception {
+        final int kcal = 2500;
+
+        fitness.setMealDailyNorm(kcal);
+        int mealDailyNorm = fitness.getMealDailyNorm();
+
+        assertThat(kcal, is(mealDailyNorm));
     }
 }
