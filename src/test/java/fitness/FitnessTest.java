@@ -47,4 +47,14 @@ public class FitnessTest {
 
         assertThat(walked, is(steps));
     }
+
+    @Test
+    public void setWaterDailyNorm() throws Exception {
+        final int ml = 2000;
+
+        fitness.setWaterDailyNorm(ml);
+        int waterDailyNorm = fitness.getWaterDailyNorm();
+
+        assertThat(ml, is(waterDailyNorm));
+    }
 }
