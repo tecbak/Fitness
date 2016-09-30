@@ -92,4 +92,7 @@ public class Fitness {
     public int walkedOnDate(LocalDate date) {
         return walks.consumedOnDate(date);
     }
+
+    /*Statistics for period*/
+
 }

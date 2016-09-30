@@ -10,7 +10,7 @@ import java.time.LocalTime;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
-public class DailyStatistics {
+public class StatisticsForDayTest {
     private Fitness fitness;
     private LocalDate[] date;
     private LocalTime[] time;
