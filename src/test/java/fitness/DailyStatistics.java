@@ -58,12 +58,12 @@ public class DailyStatistics {
 
         //Left to drink on the first day
         int expected = waterDailyNorm - (ml00 + ml01);
-        int left = fitness.waterLeft(date0);
+        int left = fitness.waterLeftOnDate(date0);
         assertThat(left, is(expected));
 
         //Left to drink on the second say
         expected = waterDailyNorm - ml10;
-        left = fitness.waterLeft(date1);
+        left = fitness.waterLeftOnDate(date1);
         assertThat(left, is(expected));
     }
 
@@ -85,12 +85,12 @@ public class DailyStatistics {
 
         //Left to eat on the first day
         int expected = mealDailyNorm - (kcal00 + kcal01);
-        int left = fitness.mealLeft(date0);
+        int left = fitness.mealLeftOnDate(date0);
         assertThat(left, is(expected));
 
         //left to eat on the second day
         expected = mealDailyNorm - kcal10;
-        left = fitness.mealLeft(date1);
+        left = fitness.mealLeftOnDate(date1);
         assertThat(left, is(expected));
     }
 
@@ -112,12 +112,12 @@ public class DailyStatistics {
 
         //Left to walk on the first day
         int expected = walkDailyNorm - (steps00 + steps01);
-        int left = fitness.walkLeft(date0);
+        int left = fitness.walkLeftOnDate(date0);
         assertThat(left, is(expected));
 
         //Left to walk on the second day
         expected = walkDailyNorm - steps10;
-        left = fitness.walkLeft(date1);
+        left = fitness.walkLeftOnDate(date1);
         assertThat(left, is(expected));
     }
 
@@ -133,11 +133,11 @@ public class DailyStatistics {
         fitness.drink(ml10, dateTime10);
 
         int expected = ml00 + ml01;
-        int actual = fitness.drunkPerDay(date0);
+        int actual = fitness.drunkOnDate(date0);
         assertThat(actual, is(expected));
 
         expected = ml10;
-        actual = fitness.drunkPerDay(date1);
+        actual = fitness.drunkOnDate(date1);
         assertThat(actual, is(expected));
     }
 }

@@ -1,57 +1,20 @@
 package fitness;
 
-import fitness.consumable.Consumable;
-import fitness.consumable.Drink;
-import fitness.consumable.Meal;
-import fitness.consumable.Walk;
+import fitness.consumable.*;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.*;
 
 public class Fitness {
-    private List<Drink> drinks = new ArrayList<>();
-    private List<Meal> meals = new ArrayList<>();
-    private List<Walk> walks = new ArrayList<>();
+    private Storage drinks = new Storage();
+    private Storage meals = new Storage();
+    private Storage walks = new Storage();
     private int waterDailyNorm;
     private int mealDailyNorm;
     private int walkDailyNorm;
 
-    public void eat(int kcal, LocalDateTime dt) {
-        Meal meal = new Meal(kcal, dt);
-        meals.add(meal);
-    }
-
-    public void drink(int ml, LocalDateTime dt) {
-        Drink drink = new Drink(ml, dt);
-        drinks.add(drink);
-    }
-
-    public void walk(int steps, LocalDateTime dt) {
-        Walk walk = new Walk(steps, dt);
-        walks.add(walk);
-    }
-
-    public int eaten() {
-        return volume(meals);
-    }
-
-    public int drunk() {
-        return volume(drinks);
-    }
-
-    public int walked() {
-        return volume(walks);
-    }
-
-    private int volume(List<? extends Consumable> consumables) {
-        int sum = 0;
-        for (Consumable consumable : consumables) {
-            sum += consumable.volume();
-        }
-        return sum;
-    }
-
+    /*Daily norms getters and setters*/
     public void setWaterDailyNorm(int waterDailyNorm) {
         this.waterDailyNorm = waterDailyNorm;
     }
@@ -76,41 +39,49 @@ public class Fitness {
         return walkDailyNorm;
     }
 
-    public int waterLeft(LocalDate date) {
-        return consumableLeft(drinks, date, waterDailyNorm);
+    /*Consuming*/
+    public void eat(int kcal, LocalDateTime dt) {
+        Meal meal = new Meal(kcal, dt);
+        meals.add(meal);
     }
 
-    public int mealLeft(LocalDate date) {
-        return consumableLeft(meals, date, mealDailyNorm);
+    public void drink(int ml, LocalDateTime dt) {
+        Drink drink = new Drink(ml, dt);
+        drinks.add(drink);
     }
 
-    public int walkLeft(LocalDate date) {
-        return consumableLeft(walks, date, walkDailyNorm);
+    public void walk(int steps, LocalDateTime dt) {
+        Walk walk = new Walk(steps, dt);
+        walks.add(walk);
     }
 
-    private int consumableLeft(List<? extends Consumable> consumables, LocalDate date, int dailyNorm) {
-        assert (dailyNorm >= 0);
-
-        int sum = 0;
-        for (Consumable consumable : consumables) {
-            if (consumable.getDate().equals(date)) {
-                sum += consumable.volume();
-            }
-        }
-        return dailyNorm - sum;
+    /*Total statistics*/
+    public int eaten() {
+        return meals.totallyConsumed();
     }
 
-    public int drunkPerDay(LocalDate date) {
-        return consumedPerDay(drinks, date);
+    public int drunk() {
+        return drinks.totallyConsumed();
     }
 
-    private int consumedPerDay(List<? extends Consumable> consumables, LocalDate date) {
-        int sum = 0;
-        for (Consumable consumable : consumables) {
-            if (consumable.getDate().equals(date)) {
-                sum += consumable.volume();
-            }
-        }
-        return sum;
+    public int walked() {
+        return walks.totallyConsumed();
+    }
+
+    /*Statistics on date*/
+    public int waterLeftOnDate(LocalDate date) {
+        return drinks.leftToConsumeOnDate(date, waterDailyNorm);
+    }
+
+    public int mealLeftOnDate(LocalDate date) {
+        return meals.leftToConsumeOnDate(date, mealDailyNorm);
+    }
+
+    public int walkLeftOnDate(LocalDate date) {
+        return walks.leftToConsumeOnDate(date, walkDailyNorm);
+    }
+
+    public int drunkOnDate(LocalDate date) {
+        return drinks.consumedOnDate(date);
     }
 }
