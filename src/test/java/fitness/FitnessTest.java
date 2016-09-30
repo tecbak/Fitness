@@ -20,31 +20,43 @@ public class FitnessTest {
 
     @Test
     public void drink() throws Exception {
-        final int ml = 200;
+        final int ml0 = 200;
+        final int ml1 = 300;
 
-        fitness.drink(ml, dt);
-        int drunk = fitness.drunk();
+        fitness.drink(ml0, dt);
+        fitness.drink(ml1, dt);
 
-        assertThat(drunk, is(ml));
+        int expected = ml0 + ml1;
+        int actual = fitness.drunk();
+
+        assertThat(actual, is(expected));
     }
 
     @Test
     public void eat() throws Exception {
-        final int kcal = 500;
+        final int kcal0 = 500;
+        final int kcal1 = 400;
 
-        fitness.eat(kcal, dt);
-        int eaten = fitness.eaten();
+        fitness.eat(kcal0, dt);
+        fitness.eat(kcal1, dt);
 
-        assertThat(eaten, is(kcal));
+        int expected = kcal0 + kcal1;
+        int actual = fitness.eaten();
+
+        assertThat(actual, is(expected));
     }
 
     @Test
     public void walk() throws Exception {
-        final int steps = 1000;
+        final int steps0 = 1000;
+        final int steps1 = 555;
 
-        fitness.walk(steps, dt);
-        int walked = fitness.walked();
+        fitness.walk(steps0, dt);
+        fitness.walk(steps1, dt);
 
-        assertThat(walked, is(steps));
+        int expected = steps0 + steps1;
+        int actual = fitness.walked();
+
+        assertThat(actual, is(expected));
     }
 }
