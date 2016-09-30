@@ -3,11 +3,7 @@ package fitness;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.sql.Time;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.util.ArrayList;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.*;
@@ -51,36 +47,4 @@ public class FitnessTest {
 
         assertThat(walked, is(steps));
     }
-
-    @Test
-    public void setAndGetWaterDailyNorm() throws Exception {
-        final int ml = 2000;
-
-        fitness.setWaterDailyNorm(ml);
-        int waterDailyNorm = fitness.getWaterDailyNorm();
-
-        assertThat(ml, is(waterDailyNorm));
-    }
-
-    @Test
-    public void setAndGetMealDailyNorm() throws Exception {
-        final int kcal = 2500;
-
-        fitness.setMealDailyNorm(kcal);
-        int mealDailyNorm = fitness.getMealDailyNorm();
-
-        assertThat(kcal, is(mealDailyNorm));
-    }
-
-    @Test
-    public void setAndGetWalkDailyNorm() throws Exception {
-        final int steps = 2000;
-
-        fitness.setWalkDailyNorm(steps);
-        int walkDailyNorm = fitness.getWalkDailyNorm();
-
-        assertThat(steps, is(walkDailyNorm));
-    }
-
-
 }
