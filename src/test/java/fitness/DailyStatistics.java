@@ -99,8 +99,12 @@ public class DailyStatistics {
         fitness.drink(volume[2], dateTime[2]);
         fitness.drink(volume[3], dateTime[3]);
 
-        int expected = volume[0] + volume[1] + volume[2] + volume[3];
-        int actual = fitness.drunk();
+        int expected = volume[0] + volume[1];
+        int actual = fitness.drunkOnDate(date[0]);
+        assertThat(actual, is(expected));
+
+        expected = volume[2] + volume[3];
+        actual = fitness.drunkOnDate(date[1]);
         assertThat(actual, is(expected));
     }
 
@@ -111,8 +115,12 @@ public class DailyStatistics {
         fitness.eat(volume[2], dateTime[2]);
         fitness.eat(volume[3], dateTime[3]);
 
-        int expected = volume[0] + volume[1] + volume[2] + volume[3];
-        int actual = fitness.eaten();
+        int expected = volume[0] + volume[1];
+        int actual = fitness.eatenOnDate(date[0]);
+        assertThat(actual, is(expected));
+
+        expected = volume[2] + volume[3];
+        actual = fitness.eatenOnDate(date[1]);
         assertThat(actual, is(expected));
     }
 
@@ -123,8 +131,12 @@ public class DailyStatistics {
         fitness.walk(volume[2], dateTime[2]);
         fitness.walk(volume[3], dateTime[3]);
 
-        int expected = volume[0] + volume[1] + volume[2] + volume[3];
-        int actual = fitness.walked();
+        int expected = volume[0] + volume[1];
+        int actual = fitness.walkedOnDate(date[0]);
+        assertThat(actual, is(expected));
+
+        expected = volume[2] + volume[3];
+        actual = fitness.walkedOnDate(date[1]);
         assertThat(actual, is(expected));
     }
 }

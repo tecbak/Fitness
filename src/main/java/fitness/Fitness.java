@@ -84,4 +84,12 @@ public class Fitness {
     public int drunkOnDate(LocalDate date) {
         return drinks.consumedOnDate(date);
     }
+
+    public int eatenOnDate(LocalDate date) {
+        return meals.consumedOnDate(date);
+    }
+
+    public int walkedOnDate(LocalDate date) {
+        return walks.consumedOnDate(date);
+    }
 }
