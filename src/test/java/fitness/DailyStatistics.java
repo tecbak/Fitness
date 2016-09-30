@@ -49,16 +49,21 @@ public class DailyStatistics {
 
         fitness.setWaterDailyNorm(waterDailyNorm);
 
-        //Drink twice at one day
+        //Drink twice on the first day
         fitness.drink(ml00, dateTime00);
         fitness.drink(ml01, dateTime01);
 
-        //Drink once at another day
+        //Drink once on the second day
         fitness.drink(ml10, dateTime10);
 
+        //Left to drink on the first day
         int expected = waterDailyNorm - (ml00 + ml01);
         int left = fitness.waterLeft(date0);
+        assertThat(left, is(expected));
 
+        //Left to drink on the second say
+        expected = waterDailyNorm - ml10;
+        left = fitness.waterLeft(date1);
         assertThat(left, is(expected));
     }
 
@@ -71,16 +76,21 @@ public class DailyStatistics {
 
         fitness.setMealDailyNorm(mealDailyNorm);
 
-        //Eat twice at one day
+        //Eat twice on the first day
         fitness.eat(kcal00, dateTime00);
         fitness.eat(kcal01, dateTime01);
 
-        //Eat once at another day
+        //Eat once on the second day
         fitness.eat(kcal10, dateTime10);
 
+        //Left to eat on the first day
         int expected = mealDailyNorm - (kcal00 + kcal01);
         int left = fitness.mealLeft(date0);
+        assertThat(left, is(expected));
 
+        //left to eat on the second day
+        expected = mealDailyNorm - kcal10;
+        left = fitness.mealLeft(date1);
         assertThat(left, is(expected));
     }
 
@@ -93,16 +103,21 @@ public class DailyStatistics {
 
         fitness.setWalkDailyNorm(walkDailyNorm);
 
-        //Walk twice at one day
+        //Walk twice on the first day
         fitness.walk(steps00, dateTime00);
         fitness.walk(steps01, dateTime01);
 
-        //Walk one at another day
+        //Walk once on the second day
         fitness.walk(steps10, dateTime10);
 
+        //Left to walk on the first day
         int expected = walkDailyNorm - (steps00 + steps01);
         int left = fitness.walkLeft(date0);
+        assertThat(left, is(expected));
 
+        //Left to walk on the second day
+        expected = walkDailyNorm - steps10;
+        left = fitness.walkLeft(date1);
         assertThat(left, is(expected));
     }
 }
