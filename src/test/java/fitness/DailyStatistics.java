@@ -120,4 +120,24 @@ public class DailyStatistics {
         left = fitness.walkLeft(date1);
         assertThat(left, is(expected));
     }
+
+    @Test
+    public void drunkPerDay() throws Exception {
+        final int ml00 = 100;
+        final int ml01 = 200;
+        final int ml10 = 300;
+
+        fitness.drink(ml00, dateTime00);
+        fitness.drink(ml01, dateTime01);
+
+        fitness.drink(ml10, dateTime10);
+
+        int expected = ml00 + ml01;
+        int actual = fitness.drunkPerDay(date0);
+        assertThat(actual, is(expected));
+
+        expected = ml10;
+        actual = fitness.drunkPerDay(date1);
+        assertThat(actual, is(expected));
+    }
 }

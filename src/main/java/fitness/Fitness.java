@@ -99,4 +99,18 @@ public class Fitness {
         }
         return dailyNorm - sum;
     }
+
+    public int drunkPerDay(LocalDate date) {
+        return consumedPerDay(drinks, date);
+    }
+
+    private int consumedPerDay(List<? extends Consumable> consumables, LocalDate date) {
+        int sum = 0;
+        for (Consumable consumable : consumables) {
+            if (consumable.getDate().equals(date)) {
+                sum += consumable.volume();
+            }
+        }
+        return sum;
+    }
 }
