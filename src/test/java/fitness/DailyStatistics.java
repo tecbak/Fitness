@@ -16,7 +16,7 @@ public class DailyStatistics {
     private LocalTime[] time;
     private LocalDateTime[] dateTime;
     private int[] volume;
-    int dailyNorm;
+    private int dailyNorm;
 
     @Before
     public void setUp() throws Exception {

@@ -41,17 +41,17 @@ public class Fitness {
 
     /*Consume*/
     public void eat(int kcal, LocalDateTime dt) {
-        Meal meal = new Meal(kcal, dt);
+        ConsumableUnit meal = new ConsumableUnit(kcal, dt);
         meals.add(meal);
     }
 
     public void drink(int ml, LocalDateTime dt) {
-        Drink drink = new Drink(ml, dt);
+        ConsumableUnit drink = new ConsumableUnit(ml, dt);
         drinks.add(drink);
     }
 
     public void walk(int steps, LocalDateTime dt) {
-        Walk walk = new Walk(steps, dt);
+        ConsumableUnit walk = new ConsumableUnit(steps, dt);
         walks.add(walk);
     }
 
