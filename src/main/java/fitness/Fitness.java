@@ -39,7 +39,7 @@ public class Fitness {
         return walkDailyNorm;
     }
 
-    /*Consuming*/
+    /*Consume*/
     public void eat(int kcal, LocalDateTime dt) {
         Meal meal = new Meal(kcal, dt);
         meals.add(meal);
@@ -69,15 +69,15 @@ public class Fitness {
     }
 
     /*Statistics on date*/
-    public int waterLeftOnDate(LocalDate date) {
+    public int leftToDrinkOnDate(LocalDate date) {
         return drinks.leftToConsumeOnDate(date, waterDailyNorm);
     }
 
-    public int mealLeftOnDate(LocalDate date) {
+    public int leftToEatOnDate(LocalDate date) {
         return meals.leftToConsumeOnDate(date, mealDailyNorm);
     }
 
-    public int walkLeftOnDate(LocalDate date) {
+    public int leftToWalkOnDate(LocalDate date) {
         return walks.leftToConsumeOnDate(date, walkDailyNorm);
     }
 

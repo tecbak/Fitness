@@ -12,132 +12,119 @@ import static org.junit.Assert.assertThat;
 
 public class DailyStatistics {
     private Fitness fitness;
-
-    private LocalDate date0;
-    private LocalTime time00;
-    private LocalTime time01;
-    private LocalDateTime dateTime00;
-    private LocalDateTime dateTime01;
-
-    private LocalDate date1;
-    private LocalTime time10;
-    private LocalDateTime dateTime10;
+    private LocalDate[] date;
+    private LocalTime[] time;
+    private LocalDateTime[] dateTime;
+    private int[] volume;
+    int dailyNorm;
 
     @Before
     public void setUp() throws Exception {
         fitness = new Fitness();
-
-        //Date, time and datetime of the first day
-        date0 = LocalDate.of(2016, 1, 1);
-        time00 = LocalTime.of(12, 30);
-        time01 = LocalTime.of(15, 25);
-        dateTime00 = LocalDateTime.of(date0, time00);
-        dateTime01 = LocalDateTime.of(date0, time01);
-
-        //Date, time and datetime of the second day
-        date1 = LocalDate.of(2016, 1, 10);
-        time10 = LocalTime.of(10, 10);
-        dateTime10 = LocalDateTime.of(date1, time10);
+        date = new LocalDate[]{
+                LocalDate.of(2016, 1, 1),
+                LocalDate.of(2016, 1, 10),};
+        time = new LocalTime[]{
+                LocalTime.of(12, 30),
+                LocalTime.of(15, 25),
+                LocalTime.of(16, 30),
+                LocalTime.of(17, 44)};
+        dateTime = new LocalDateTime[]{
+                LocalDateTime.of(date[0], time[0]),
+                LocalDateTime.of(date[0], time[1]),
+                LocalDateTime.of(date[1], time[2]),
+                LocalDateTime.of(date[1], time[3])};
+        volume = new int[]{500, 600, 1000, 1200};
+        dailyNorm = 3000;
     }
 
     @Test
-    public void waterLeft() throws Exception {
-        final int waterDailyNorm = 3000;
-        final int ml00 = 100;
-        final int ml01 = 200;
-        final int ml10 = 300;
+    public void leftToDrinkTest() throws Exception {
+        fitness.setWaterDailyNorm(dailyNorm);
 
-        fitness.setWaterDailyNorm(waterDailyNorm);
+        fitness.drink(volume[0], dateTime[0]);
+        fitness.drink(volume[1], dateTime[1]);
+        fitness.drink(volume[2], dateTime[2]);
+        fitness.drink(volume[3], dateTime[3]);
 
-        //Drink twice on the first day
-        fitness.drink(ml00, dateTime00);
-        fitness.drink(ml01, dateTime01);
-
-        //Drink once on the second day
-        fitness.drink(ml10, dateTime10);
-
-        //Left to drink on the first day
-        int expected = waterDailyNorm - (ml00 + ml01);
-        int left = fitness.waterLeftOnDate(date0);
-        assertThat(left, is(expected));
-
-        //Left to drink on the second say
-        expected = waterDailyNorm - ml10;
-        left = fitness.waterLeftOnDate(date1);
-        assertThat(left, is(expected));
-    }
-
-    @Test
-    public void mealLeft() throws Exception {
-        final int mealDailyNorm = 2000;
-        final int kcal00 = 500;
-        final int kcal01 = 600;
-        final int kcal10 = 1000;
-
-        fitness.setMealDailyNorm(mealDailyNorm);
-
-        //Eat twice on the first day
-        fitness.eat(kcal00, dateTime00);
-        fitness.eat(kcal01, dateTime01);
-
-        //Eat once on the second day
-        fitness.eat(kcal10, dateTime10);
-
-        //Left to eat on the first day
-        int expected = mealDailyNorm - (kcal00 + kcal01);
-        int left = fitness.mealLeftOnDate(date0);
-        assertThat(left, is(expected));
-
-        //left to eat on the second day
-        expected = mealDailyNorm - kcal10;
-        left = fitness.mealLeftOnDate(date1);
-        assertThat(left, is(expected));
-    }
-
-    @Test
-    public void walkLeft() throws Exception {
-        final int walkDailyNorm = 1500;
-        final int steps00 = 1000;
-        final int steps01 = 400;
-        final int steps10 = 7000;
-
-        fitness.setWalkDailyNorm(walkDailyNorm);
-
-        //Walk twice on the first day
-        fitness.walk(steps00, dateTime00);
-        fitness.walk(steps01, dateTime01);
-
-        //Walk once on the second day
-        fitness.walk(steps10, dateTime10);
-
-        //Left to walk on the first day
-        int expected = walkDailyNorm - (steps00 + steps01);
-        int left = fitness.walkLeftOnDate(date0);
-        assertThat(left, is(expected));
-
-        //Left to walk on the second day
-        expected = walkDailyNorm - steps10;
-        left = fitness.walkLeftOnDate(date1);
-        assertThat(left, is(expected));
-    }
-
-    @Test
-    public void drunkPerDay() throws Exception {
-        final int ml00 = 100;
-        final int ml01 = 200;
-        final int ml10 = 300;
-
-        fitness.drink(ml00, dateTime00);
-        fitness.drink(ml01, dateTime01);
-
-        fitness.drink(ml10, dateTime10);
-
-        int expected = ml00 + ml01;
-        int actual = fitness.drunkOnDate(date0);
+        int expected = dailyNorm - (volume[0] + volume[1]);
+        int actual = fitness.leftToDrinkOnDate(date[0]);
         assertThat(actual, is(expected));
 
-        expected = ml10;
-        actual = fitness.drunkOnDate(date1);
+        expected = dailyNorm - (volume[2] + volume[3]);
+        actual = fitness.leftToDrinkOnDate(date[1]);
+        assertThat(actual, is(expected));
+    }
+
+    @Test
+    public void leftToEatTest() throws Exception {
+        fitness.setMealDailyNorm(dailyNorm);
+
+        fitness.eat(volume[0], dateTime[0]);
+        fitness.eat(volume[1], dateTime[1]);
+        fitness.eat(volume[2], dateTime[2]);
+        fitness.eat(volume[3], dateTime[3]);
+
+        int expected = dailyNorm - (volume[0] + volume[1]);
+        int actual = fitness.leftToEatOnDate(date[0]);
+        assertThat(actual, is(expected));
+
+        expected = dailyNorm - (volume[2] + volume[3]);
+        actual = fitness.leftToEatOnDate(date[1]);
+        assertThat(actual, is(expected));
+    }
+
+    @Test
+    public void leftToWalkTest() throws Exception {
+        fitness.setWalkDailyNorm(dailyNorm);
+
+        fitness.walk(volume[0], dateTime[0]);
+        fitness.walk(volume[1], dateTime[1]);
+        fitness.walk(volume[2], dateTime[2]);
+        fitness.walk(volume[3], dateTime[3]);
+
+        int expected = dailyNorm - (volume[0] + volume[1]);
+        int actual = fitness.leftToWalkOnDate(date[0]);
+        assertThat(actual, is(expected));
+
+        expected = dailyNorm - (volume[2] + volume[3]);
+        actual = fitness.leftToWalkOnDate(date[1]);
+        assertThat(actual, is(expected));
+    }
+
+    @Test
+    public void drunkOnDateTest() throws Exception {
+        fitness.drink(volume[0], dateTime[0]);
+        fitness.drink(volume[1], dateTime[1]);
+        fitness.drink(volume[2], dateTime[2]);
+        fitness.drink(volume[3], dateTime[3]);
+
+        int expected = volume[0] + volume[1] + volume[2] + volume[3];
+        int actual = fitness.drunk();
+        assertThat(actual, is(expected));
+    }
+
+    @Test
+    public void eatenOnDateTest() throws Exception {
+        fitness.eat(volume[0], dateTime[0]);
+        fitness.eat(volume[1], dateTime[1]);
+        fitness.eat(volume[2], dateTime[2]);
+        fitness.eat(volume[3], dateTime[3]);
+
+        int expected = volume[0] + volume[1] + volume[2] + volume[3];
+        int actual = fitness.eaten();
+        assertThat(actual, is(expected));
+    }
+
+    @Test
+    public void walkedOnDateTest() throws Exception {
+        fitness.walk(volume[0], dateTime[0]);
+        fitness.walk(volume[1], dateTime[1]);
+        fitness.walk(volume[2], dateTime[2]);
+        fitness.walk(volume[3], dateTime[3]);
+
+        int expected = volume[0] + volume[1] + volume[2] + volume[3];
+        int actual = fitness.walked();
         assertThat(actual, is(expected));
     }
 }
