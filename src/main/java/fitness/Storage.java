@@ -1,7 +1,5 @@
 package fitness;
 
-import fitness.consumable.Consumable;
-
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;

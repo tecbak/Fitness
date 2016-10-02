@@ -1,7 +1,5 @@
 package fitness;
 
-import fitness.consumable.ConsumableUnit;
-
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -45,17 +43,17 @@ public class Fitness {
 
     /*Consume*/
     public void eat(int kcal, LocalDateTime dt) {
-        ConsumableUnit meal = new ConsumableUnit(kcal, dt);
+        Consumable meal = new Consumable(kcal, dt);
         meals.add(meal);
     }
 
     public void drink(int ml, LocalDateTime dt) {
-        ConsumableUnit drink = new ConsumableUnit(ml, dt);
+        Consumable drink = new Consumable(ml, dt);
         drinks.add(drink);
     }
 
     public void walk(int steps, LocalDateTime dt) {
-        ConsumableUnit walk = new ConsumableUnit(steps, dt);
+        Consumable walk = new Consumable(steps, dt);
         walks.add(walk);
     }
 
