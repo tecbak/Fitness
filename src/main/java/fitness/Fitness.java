@@ -1,10 +1,9 @@
 package fitness;
 
-import fitness.consumable.*;
+import fitness.consumable.ConsumableUnit;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.*;
 
 public class Fitness {
     private Storage drinks = new Storage();
@@ -91,6 +90,11 @@ public class Fitness {
 
     public int walkedOnDate(LocalDate date) {
         return walks.consumedOnDate(date);
+    }
+
+    public int drunkRateForPeriod(LocalDate start, LocalDate end) {
+
+        return 0; // TODO: 02.10.2016 stub
     }
 
     /*Statistics for period*/
