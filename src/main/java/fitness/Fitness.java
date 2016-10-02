@@ -92,11 +92,19 @@ public class Fitness {
         return walks.consumedOnDate(date);
     }
 
+    public int drunkRateOnDate(LocalDate date) {
+        return drunkOnDate(date) * 100 / waterDailyNorm;
+    }
+
+    public int eatenRateOnDate(LocalDate date) {
+        return eatenOnDate(date) * 100 / mealDailyNorm;
+    }
+
+    /*Statistics for period*/
+
     public int drunkRateForPeriod(LocalDate start, LocalDate end) {
 
         return 0; // TODO: 02.10.2016 stub
     }
-
-    /*Statistics for period*/
 
 }

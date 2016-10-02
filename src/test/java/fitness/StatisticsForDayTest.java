@@ -8,6 +8,7 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
 
 public class StatisticsForDayTest {
@@ -39,7 +40,7 @@ public class StatisticsForDayTest {
     }
 
     @Test
-    public void leftToDrinkTest() throws Exception {
+    public void testLeftToDrink() throws Exception {
         fitness.setWaterDailyNorm(dailyNorm);
 
         fitness.drink(volume[0], dateTime[0]);
@@ -57,7 +58,7 @@ public class StatisticsForDayTest {
     }
 
     @Test
-    public void leftToEatTest() throws Exception {
+    public void testLeftToEat() throws Exception {
         fitness.setMealDailyNorm(dailyNorm);
 
         fitness.eat(volume[0], dateTime[0]);
@@ -75,7 +76,7 @@ public class StatisticsForDayTest {
     }
 
     @Test
-    public void leftToWalkTest() throws Exception {
+    public void testLeftToWalk() throws Exception {
         fitness.setWalkDailyNorm(dailyNorm);
 
         fitness.walk(volume[0], dateTime[0]);
@@ -93,7 +94,7 @@ public class StatisticsForDayTest {
     }
 
     @Test
-    public void drunkOnDateTest() throws Exception {
+    public void testDrunkOnDate() throws Exception {
         fitness.drink(volume[0], dateTime[0]);
         fitness.drink(volume[1], dateTime[1]);
         fitness.drink(volume[2], dateTime[2]);
@@ -109,7 +110,7 @@ public class StatisticsForDayTest {
     }
 
     @Test
-    public void eatenOnDateTest() throws Exception {
+    public void testEatenOnDate() throws Exception {
         fitness.eat(volume[0], dateTime[0]);
         fitness.eat(volume[1], dateTime[1]);
         fitness.eat(volume[2], dateTime[2]);
@@ -125,7 +126,7 @@ public class StatisticsForDayTest {
     }
 
     @Test
-    public void walkedOnDateTest() throws Exception {
+    public void testWalkedOnDate() throws Exception {
         fitness.walk(volume[0], dateTime[0]);
         fitness.walk(volume[1], dateTime[1]);
         fitness.walk(volume[2], dateTime[2]);
@@ -138,5 +139,41 @@ public class StatisticsForDayTest {
         expected = volume[2] + volume[3];
         actual = fitness.walkedOnDate(date[1]);
         assertThat(actual, is(expected));
+    }
+
+    @Test
+    public void testDrunkRateOnDate() throws Exception {
+        fitness.setWaterDailyNorm(dailyNorm);
+
+        fitness.drink(volume[0], dateTime[0]);
+        fitness.drink(volume[1], dateTime[1]);
+        fitness.drink(volume[2], dateTime[2]);
+        fitness.drink(volume[3], dateTime[3]);
+
+        int expected = (volume[0] + volume[1]) * 100 / dailyNorm;
+        int actual = fitness.drunkRateOnDate(date[0]);
+        assertEquals(expected, actual);
+
+        expected = (volume[2] + volume[3]) * 100 / dailyNorm;
+        actual = fitness.drunkRateOnDate(date[1]);
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void testEatenRateOnDate() throws Exception {
+        fitness.setMealDailyNorm(dailyNorm);
+
+        fitness.eat(volume[0], dateTime[0]);
+        fitness.eat(volume[1], dateTime[1]);
+        fitness.eat(volume[2], dateTime[2]);
+        fitness.eat(volume[3], dateTime[3]);
+
+        int expected = (volume[0] + volume[1]) * 100 / dailyNorm;
+        int actual = fitness.eatenRateOnDate(date[0]);
+        assertEquals(expected, actual);
+
+        expected = (volume[2] + volume[3]) * 100 / dailyNorm;
+        actual = fitness.eatenRateOnDate(date[1]);
+        assertEquals(expected, actual);
     }
 }
