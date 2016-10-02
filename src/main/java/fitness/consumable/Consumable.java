@@ -9,7 +9,7 @@ public interface Consumable {
 
     LocalDateTime getDateTime();
 
-     LocalTime getTime();
+    LocalTime getTime();
 
-     LocalDate getDate();
+    LocalDate getDate();
 }

@@ -9,8 +9,6 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 
-import static org.hamcrest.CoreMatchers.is;
-
 public class StatisticsForPeriodTest {
     private Fitness fitness;
     private LocalDate[] date;
@@ -18,6 +16,7 @@ public class StatisticsForPeriodTest {
     private LocalDateTime[] dateTime;
     private int[] volume;
     private int dailyNorm;
+    private int median;
 
     @Before
     public void setUp() throws Exception {
@@ -35,21 +34,26 @@ public class StatisticsForPeriodTest {
                 LocalDateTime.of(date[3], time)};
         volume = new int[]{500, 600, 1000, 1200};
         dailyNorm = 3000;
+
+        int[] dailyRate = new int[]{
+                volume[0] * 100 / dailyNorm,
+                volume[1] * 100 / dailyNorm,
+                volume[2] * 100 / dailyNorm,
+                volume[3] * 100 / dailyNorm};
+        median = (dailyRate[1] + dailyRate[2]) / 2;
     }
 
-
-    @Ignore
     @Test
     public void drunkRateForPeriodTest() throws Exception {
-        fitness.getWaterDailyNorm();
+        fitness.setWaterDailyNorm(dailyNorm);
         fitness.drink(volume[0], dateTime[0]);
         fitness.drink(volume[1], dateTime[1]);
         fitness.drink(volume[2], dateTime[2]);
         fitness.drink(volume[3], dateTime[3]);
 
-        int expected = 800;
+        int expected = median;
         int actual = fitness.drunkRateForPeriod(date[0], date[3]);
 
-        Assert.assertThat(actual, is(expected));
+        Assert.assertEquals(expected, actual);
     }
 }
