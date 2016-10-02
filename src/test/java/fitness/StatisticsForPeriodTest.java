@@ -82,6 +82,5 @@ public class StatisticsForPeriodTest {
         int actual = fitness.walkedRateForPeriod(date[0], date[3]);
 
         Assert.assertEquals(expected, actual);
-
     }
 }

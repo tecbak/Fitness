@@ -46,13 +46,10 @@ public class TotalStatisticsTest {
 
     @Test
     public void testTotallyWalked() throws Exception {
-        final int steps0 = 1000;
-        final int steps1 = 555;
+        fitness.walk(volume[0], dateTime);
+        fitness.walk(volume[1], dateTime);
 
-        fitness.walk(steps0, dateTime);
-        fitness.walk(steps1, dateTime);
-
-        int expected = steps0 + steps1;
+        int expected = volume[0] + volume[1];
         int actual = fitness.walked();
 
         assertThat(actual, is(expected));
