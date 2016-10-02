@@ -2,7 +2,6 @@ package fitness;
 
 import org.junit.Assert;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import java.time.LocalDate;
@@ -44,7 +43,7 @@ public class StatisticsForPeriodTest {
     }
 
     @Test
-    public void drunkRateForPeriodTest() throws Exception {
+    public void testDrunkRateForPeriod() throws Exception {
         fitness.setWaterDailyNorm(dailyNorm);
         fitness.drink(volume[0], dateTime[0]);
         fitness.drink(volume[1], dateTime[1]);
@@ -55,5 +54,20 @@ public class StatisticsForPeriodTest {
         int actual = fitness.drunkRateForPeriod(date[0], date[3]);
 
         Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void testEatenRateForPeriod() throws Exception {
+        fitness.setMealDailyNorm(dailyNorm);
+        fitness.eat(volume[0], dateTime[0]);
+        fitness.eat(volume[1], dateTime[1]);
+        fitness.eat(volume[2], dateTime[2]);
+        fitness.eat(volume[3], dateTime[3]);
+
+        int expected = median;
+        int actual = fitness.eatenRateForPeriod(date[0], date[3]);
+
+        Assert.assertEquals(expected, actual);
+
     }
 }

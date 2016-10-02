@@ -4,9 +4,6 @@ import fitness.consumable.ConsumableUnit;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.*;
-
-import static java.time.temporal.ChronoUnit.DAYS;
 
 public class Fitness {
     private Storage drinks = new Storage();
@@ -108,32 +105,11 @@ public class Fitness {
     }
 
     /*Statistics for period*/
-
     public int drunkRateForPeriod(LocalDate start, LocalDate end) {
-
         return drinks.rateForPeriod(start, end, waterDailyNorm);
     }
 
-//    private List<Integer> getDailyRates(LocalDate start, LocalDate end) {
-//        long days = DAYS.between(start, end) + 1;
-//        List<Integer> rates = new ArrayList<>();
-//        for (int i = 0; i < days; i++) {
-//            LocalDate date = start.plusDays(i);
-//            int rate = drunkRateOnDate(date);
-//            rates.add(rate);
-//        }
-//        return rates;
-//    }
-//
-//    private int getMedian(List<Integer> list) {
-//        Collections.sort(list);
-//        int size = list.size();
-//        if (size % 2 == 1) {
-//            return list.get(size / 2);
-//        } else {
-//            int a = list.get(size / 2);
-//            int b = list.get(size / 2 - 1);
-//            return (a + b) / 2;
-//        }
-//    }
+    public int eatenRateForPeriod(LocalDate start, LocalDate end) {
+        return meals.rateForPeriod(start, end, mealDailyNorm);
+    }
 }
