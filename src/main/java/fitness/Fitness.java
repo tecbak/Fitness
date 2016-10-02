@@ -4,6 +4,10 @@ import fitness.consumable.ConsumableUnit;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class Fitness {
     private Storage drinks = new Storage();
@@ -12,6 +16,7 @@ public class Fitness {
     private int waterDailyNorm;
     private int mealDailyNorm;
     private int walkDailyNorm;
+    private List<Routine> routines = new ArrayList<>();
 
     /*Daily norms getters and setters*/
     public void setWaterDailyNorm(int waterDailyNorm) {
@@ -115,5 +120,20 @@ public class Fitness {
 
     public int walkedRateForPeriod(LocalDate start, LocalDate end) {
         return walks.rateForPeriod(start, end, walkDailyNorm);
+    }
+
+    /*Routines*/
+    public void addRoutine(LocalTime time, String message) {
+        routines.add(new Routine(time, message));
+    }
+
+    public String nextRoutine(LocalTime time) {
+        Collections.sort(routines);
+        for (Routine routine : routines) {
+            if (routine.getTime().compareTo(time) >= 0) {
+                return routine.toString();
+            }
+        }
+        return "Nothing left to do today";
     }
 }
