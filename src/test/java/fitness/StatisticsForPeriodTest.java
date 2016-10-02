@@ -68,6 +68,20 @@ public class StatisticsForPeriodTest {
         int actual = fitness.eatenRateForPeriod(date[0], date[3]);
 
         Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void testWalkedRateForPeriod() throws Exception {
+        fitness.setWalkDailyNorm(dailyNorm);
+        fitness.walk(volume[0], dateTime[0]);
+        fitness.walk(volume[1], dateTime[1]);
+        fitness.walk(volume[2], dateTime[2]);
+        fitness.walk(volume[3], dateTime[3]);
+
+        int expected = median;
+        int actual = fitness.walkedRateForPeriod(date[0], date[3]);
+
+        Assert.assertEquals(expected, actual);
 
     }
 }

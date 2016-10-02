@@ -112,4 +112,8 @@ public class Fitness {
     public int eatenRateForPeriod(LocalDate start, LocalDate end) {
         return meals.rateForPeriod(start, end, mealDailyNorm);
     }
+
+    public int walkedRateForPeriod(LocalDate start, LocalDate end) {
+        return walks.rateForPeriod(start, end, walkDailyNorm);
+    }
 }
