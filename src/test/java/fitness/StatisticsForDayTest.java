@@ -176,4 +176,22 @@ public class StatisticsForDayTest {
         actual = fitness.eatenRateOnDate(date[1]);
         assertEquals(expected, actual);
     }
+
+    @Test
+    public void testWalkedRateOnDate() throws Exception {
+        fitness.setWalkDailyNorm(dailyNorm);
+
+        fitness.walk(volume[0], dateTime[0]);
+        fitness.walk(volume[1], dateTime[1]);
+        fitness.walk(volume[2], dateTime[2]);
+        fitness.walk(volume[3], dateTime[3]);
+
+        int expected = (volume[0] + volume[1]) * 100 / dailyNorm;
+        int actual = fitness.walkedRateOnDate(date[0]);
+        assertEquals(expected, actual);
+
+        expected = (volume[2] + volume[3]) * 100 / dailyNorm;
+        actual = fitness.walkedRateOnDate(date[1]);
+        assertEquals(expected, actual);
+    }
 }

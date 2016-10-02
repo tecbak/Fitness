@@ -100,11 +100,14 @@ public class Fitness {
         return eatenOnDate(date) * 100 / mealDailyNorm;
     }
 
+    public int walkedRateOnDate(LocalDate date) {
+        return walkedOnDate(date) * 100 / walkDailyNorm;
+    }
+
     /*Statistics for period*/
 
     public int drunkRateForPeriod(LocalDate start, LocalDate end) {
 
         return 0; // TODO: 02.10.2016 stub
     }
-
 }
