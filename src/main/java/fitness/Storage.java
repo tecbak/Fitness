@@ -1,13 +1,15 @@
 package fitness;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.*;
 
 class Storage {
-        private Map<LocalDate, List<Consumable>> registry = new HashMap<>();
+    private Map<LocalDate, List<Consumable>> registry = new HashMap<>();
 
-    void add(Consumable consumable) {
-        LocalDate date = consumable.getDate();
+    void add(int volume, LocalDateTime dateTime) {
+        Consumable consumable = new Consumable(volume, dateTime);
+        LocalDate date = dateTime.toLocalDate();
         List<Consumable> consumables = getConsumablesByDate(date);
         consumables.add(consumable);
     }

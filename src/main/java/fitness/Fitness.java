@@ -42,19 +42,16 @@ public class Fitness {
     }
 
     /*Consume*/
-    public void eat(int kcal, LocalDateTime dt) {
-        Consumable meal = new Consumable(kcal, dt);
-        meals.add(meal);
+    public void eat(int kcal, LocalDateTime dateTime) {
+        meals.add(kcal, dateTime);
     }
 
-    public void drink(int ml, LocalDateTime dt) {
-        Consumable drink = new Consumable(ml, dt);
-        drinks.add(drink);
+    public void drink(int ml, LocalDateTime dateTime) {
+        drinks.add(ml, dateTime);
     }
 
-    public void walk(int steps, LocalDateTime dt) {
-        Consumable walk = new Consumable(steps, dt);
-        walks.add(walk);
+    public void walk(int steps, LocalDateTime dateTime) {
+        walks.add(steps, dateTime);
     }
 
     /*Total statistics*/
