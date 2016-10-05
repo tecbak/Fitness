@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 
-public class Consumable {
+class Consumable {
     private final int volume;
     private final LocalDateTime dateTime;
 

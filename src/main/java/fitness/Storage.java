@@ -1,31 +1,37 @@
 package fitness;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 class Storage {
-    private List<Consumable> list = new ArrayList<>();
+    private Map<LocalDate, List<Consumable>> map = new HashMap<>();
 
     void add(Consumable consumable) {
-        list.add(consumable);
+        LocalDate date = consumable.getDate();
+        if (map.containsKey(date)) {
+            List<Consumable> consumables = map.get(date);
+            consumables.add(consumable);
+        } else {
+            ArrayList<Consumable> consumables = new ArrayList<>();
+            consumables.add(consumable);
+            map.put(date, consumables);
+        }
     }
 
     int totallyConsumed() {
         int sum = 0;
-        for (Consumable consumable : list) {
-            sum += consumable.volume();
+        for (List<Consumable> consumables : map.values()) {
+            for (Consumable consumable : consumables) {
+                sum += consumable.volume();
+            }
         }
         return sum;
     }
 
     int consumedOnDate(LocalDate date) {
         int sum = 0;
-        for (Consumable consumable : list) {
-            if (consumable.getDate().equals(date)) {
-                sum += consumable.volume();
-            }
+        for (Consumable consumable : map.get(date)) {
+            sum += consumable.volume();
         }
         return sum;
     }
