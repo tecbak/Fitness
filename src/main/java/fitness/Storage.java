@@ -4,23 +4,27 @@ import java.time.LocalDate;
 import java.util.*;
 
 class Storage {
-    private Map<LocalDate, List<Consumable>> map = new HashMap<>();
+        private Map<LocalDate, List<Consumable>> registry = new HashMap<>();
 
     void add(Consumable consumable) {
         LocalDate date = consumable.getDate();
-        if (map.containsKey(date)) {
-            List<Consumable> consumables = map.get(date);
-            consumables.add(consumable);
+        List<Consumable> consumables = getConsumablesByDate(date);
+        consumables.add(consumable);
+    }
+
+    private List<Consumable> getConsumablesByDate(LocalDate date) {
+        if (registry.containsKey(date)) {
+            return registry.get(date);
         } else {
-            ArrayList<Consumable> consumables = new ArrayList<>();
-            consumables.add(consumable);
-            map.put(date, consumables);
+            List<Consumable> consumables = new ArrayList<>();
+            registry.put(date, consumables);
+            return consumables;
         }
     }
 
     int totallyConsumed() {
         int sum = 0;
-        for (LocalDate date : map.keySet()) {
+        for (LocalDate date : registry.keySet()) {
             sum += consumedOnDate(date);
         }
         return sum;
@@ -28,7 +32,7 @@ class Storage {
 
     int consumedOnDate(LocalDate date) {
         int sum = 0;
-        for (Consumable consumable : map.get(date)) {
+        for (Consumable consumable : registry.get(date)) {
             sum += consumable.volume();
         }
         return sum;
