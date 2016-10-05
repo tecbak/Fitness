@@ -20,10 +20,8 @@ class Storage {
 
     int totallyConsumed() {
         int sum = 0;
-        for (List<Consumable> consumables : map.values()) {
-            for (Consumable consumable : consumables) {
-                sum += consumable.volume();
-            }
+        for (LocalDate date : map.keySet()) {
+            sum += consumedOnDate(date);
         }
         return sum;
     }
